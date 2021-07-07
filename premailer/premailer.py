@@ -136,6 +136,7 @@ class Premailer(object):
         remove_unset_properties=True,
         allow_network=True,
         allow_insecure_ssl=False,
+        session=None,
     ):
         self.html = html
         self.base_url = base_url
@@ -179,6 +180,7 @@ class Premailer(object):
         self.remove_unset_properties = remove_unset_properties
         self.allow_network = allow_network
         self.allow_insecure_ssl = allow_insecure_ssl
+        self.session = session or requests
 
         if cssutils_logging_handler:
             cssutils.log.addHandler(cssutils_logging_handler)
@@ -521,7 +523,7 @@ class Premailer(object):
             return out
 
     def _load_external_url(self, url):
-        response = requests.get(url, verify=not self.allow_insecure_ssl)
+        response = self.session.get(url, verify=not self.allow_insecure_ssl)
         response.raise_for_status()
         return response.text
 
