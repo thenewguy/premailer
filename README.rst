@@ -135,6 +135,7 @@ The ``transform`` shortcut function transforms the given HTML using the defaults
     remove_unset_properties=True # Remove CSS properties if their value is unset when merged
     allow_network=True # allow network access to fetch linked css files
     allow_insecure_ssl=False # Don't allow unverified SSL certificates for external links
+    session=None # Session used for http requests - supply your own for caching or to provide authentication
 
 For more advanced options, check out the code of the ``Premailer`` class
 and all its options in its constructor.
